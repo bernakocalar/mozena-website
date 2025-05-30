@@ -1,4 +1,80 @@
 @import "tailwindcss";
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: linear-gradient(-45deg, #1e3e75, #193a66, #536fcc, #2f323e);
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+}
+/* Temel stiller */
+.form-group {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.form-input,
+.form-input:focus,
+textarea.form-input {
+  width: 100%;
+  padding: 12px 10px 8px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background-color: transparent;
+  color: #000;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+textarea.form-input:focus {
+  border-bottom-color: #2563eb; /* blue-600 */
+  outline: none;
+}
+
+
+
+.form-label {
+  position: absolute;
+  top: 12px;
+  font-size: 14px;
+  color: #fff; /* gray-500 */
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.form-group:hover .form-label,
+.form-label.active {
+  top: -10px;
+  font-size: 12px;
+  color: #fff; /* blue-600 */
+ 
+  padding: 0 4px;
+}
+
+textarea.form-input {
+  resize: vertical;
+}
+
+
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
 
 @theme {
   --spacing-sectionX: 3.125rem;
@@ -9,9 +85,10 @@
 
   --spacing-section: 3.125rem 6.25rem;
   --spacing-section-m: 1rem 3.125rem;
-  --color-text: #002566;
-  --color-background: #ffffff;
-  --color-primary: #0055e3;
+  --color-text: #1e3e75;
+  --color-background: #193a66;
+  --color-primary: #536fcc;
+  --color-secondary: #2f323e;
   /* H0 Clamp: Normally, 128px on Desktop */
   --text-h0: clamp(2.5rem, 5vw, 8rem);
 
@@ -76,5 +153,36 @@
     background-color: var(--color-background);
     font-weight: 600;
   }
-  
+  .fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-wave {
+  background-size: 200% 200%;
+  animation: waveGradient 10s ease infinite;
+}
+
+@keyframes waveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 }

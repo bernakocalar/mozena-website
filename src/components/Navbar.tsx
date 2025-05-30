@@ -1,121 +1,111 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === "tr" ? "en" : "tr");
+  };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="flex justify-between items-center px-6 md:px-12 py-6">
+    <nav className="sticky top-0 z-50  text-white shadow-md ">
+      <div className="flex justify-between items-center px-6 md:px-12 py-4">
         {/* Logo */}
-        <div className="relative">
-          <span className="text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-[#0055e3] to-[#7fbfff] relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#0055e3] after:rotate-[-2deg]">
-            Mozena
-          </span>
-        </div>
+        <a href="/" className="text-2xl font-bold tracking-wide">
+          {t("logo")}
+        </a>
 
-        {/* Desktop Menü */}
-        <ul className="hidden md:flex space-x-10 text-[#002566] font-medium">
-          <li>
-            <a
-              href="#services"
-              className="hover:text-[#0055e3] transition-colors duration-200"
-            >
-              Hizmetlerimiz
-            </a>
-          </li>
-          <li>
-            <a
-              href="#projects"
-              className="hover:text-[#0055e3] transition-colors duration-200"
-            >
-              Projelerimiz
-            </a>
-          </li>
-          <li>
-            <a
-              href="#blog"
-              className="hover:text-[#0055e3] transition-colors duration-200"
-            >
-              Blog
-            </a>
-          </li>
-          <li>
-            <a
-              href="#contact"
-              className="hover:text-[#0055e3] transition-colors duration-200"
-            >
-              İletişim
-            </a>
-          </li>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-8 font-medium cursor-pointer hover:shadow-2xl">
+          {["services", "projects", "blog", "contact"].map((item) => (
+            <li key={item}>
+              <a href={`#${item}`} className="  transition-colors duration-200">
+                {t(item)}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        {/* Desktop Buton */}
-        <div className="hidden md:block">
-          <a href="#contact" className="button-primary">
-            Daha Fazla Öğren
+        {/* Desktop Language Switcher & Button */}
+        <div className="hidden md:flex items-center space-x-4">
+          <button
+            onClick={toggleLanguage}
+            className="px-3 py-1 border border-white rounded hover:bg-white hover:text-primary transition"
+          >
+            {i18n.language === "tr" ? "EN" : "TR"}
+          </button>
+
+          <a
+            href="#contact"
+            className="bg-white text-primary px-4 py-2 rounded hover:bg-secondary hover:text-white transition"
+          >
+            {t("learnMore")}
           </a>
         </div>
 
-        {/* Mobile Hamburger Icon */}
+        {/* Mobile Hamburger */}
         <div className="md:hidden">
           {isOpen ? (
             <X
               size={28}
               onClick={() => setIsOpen(false)}
-              className="cursor-pointer text-[#0055e3]"
+              className="cursor-pointer"
             />
           ) : (
             <Menu
               size={28}
               onClick={() => setIsOpen(true)}
-              className="cursor-pointer text-[#0055e3]"
+              className="cursor-pointer"
             />
           )}
         </div>
       </div>
 
-      {/* Mobile Menü */}
-      {isOpen && (
-        <div className="md:hidden flex flex-col items-center gap-6 pb-6">
-          <a
-            href="#services"
-            className="text-[#002566] font-medium hover:text-[#0055e3]"
-            onClick={() => setIsOpen(false)}
-          >
-            Hizmetlerimiz
-          </a>
-          <a
-            href="#projects"
-            className="text-[#002566] font-medium hover:text-[#0055e3]"
-            onClick={() => setIsOpen(false)}
-          >
-            Projelerimiz
-          </a>
-          <a
-            href="#blog"
-            className="text-[#002566] font-medium hover:text-[#0055e3]"
-            onClick={() => setIsOpen(false)}
-          >
-            Blog
-          </a>
-          <a
-            href="#contact"
-            className="text-[#002566] font-medium hover:text-[#0055e3]"
-            onClick={() => setIsOpen(false)}
-          >
-            İletişim
-          </a>
-          <a
-            href="#contact"
-            className="button-primary"
-            onClick={() => setIsOpen(false)}
-          >
-            Daha Fazla Öğren
-          </a>
-        </div>
-      )}
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-max-height duration-300 ${
+          isOpen ? "max-h-64" : "max-h-0"
+        }`}
+      >
+        <ul className="flex flex-col items-center space-y-4 py-4">
+          {["services", "projects", "blog", "contact"].map((item) => (
+            <li key={item}>
+              <a
+                href={`#${item}`}
+                className="hover:text-secondary"
+                onClick={() => setIsOpen(false)}
+              >
+                {t(item)}
+              </a>
+            </li>
+          ))}
 
+          <li>
+            <a
+              href="#contact"
+              className="bg-white text-primary px-4 py-2 rounded hover:bg-secondary hover:text-white transition"
+              onClick={() => setIsOpen(false)}
+            >
+              {t("learnMore")}
+            </a>
+          </li>
+
+          <li>
+            <button
+              onClick={() => {
+                toggleLanguage();
+                setIsOpen(false);
+              }}
+              className="px-3 py-1 border border-white rounded hover:bg-white hover:text-primary transition"
+            >
+              {i18n.language === "tr" ? "EN" : "TR"}
+            </button>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };

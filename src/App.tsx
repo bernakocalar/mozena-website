@@ -1,5 +1,4 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
+import "./i18n";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import CommunicationForm from "./components/CommunicationForm";
@@ -7,7 +6,6 @@ import Blog from "./components/Blog";
 import Services from "./components/Services";
 import Projects from "./components/Projects";
 import CookieConsent from "react-cookie-consent";
-import background_items from "./assets/Background items.png";
 import rocketImage from "./assets/Uzay.png";
 import hizmetlerimiz from "./assets/hizmetlerimiz.png";
 
@@ -44,16 +42,11 @@ function App() {
         </CookieConsent>
       </div>
 
-      <Navbar />
       <section id="about">
-        <About
-          title={"Güvenilir ve Sonuç Odaklı"}
-          background_items={background_items}
-          rocket_image={rocketImage}
-        />
+        <About title={"Güvenilir ve Sonuç Odaklı"} />
       </section>
       <section id="projects">
-        <Projects title={"Projects"} />
+        <Projects />
       </section>
       <section id="services">
         <Services
@@ -72,20 +65,16 @@ function App() {
           subTitle3={
             "Velit dolor enim pariatur excepteur commodo mollit commodo qui pariatur esse consectetur. Elit proident et proident est anim et fugiat consectetur reprehenderit veniam dolore ut sint aliqua eu."
           }
-            
         />
       </section>
       <section id="blog">
-        <Blog
-         
-        />
+        <Blog />
       </section>
       <section id="contact">
-        <CommunicationForm title={"CommunicationForm"} />
+        <CommunicationForm />
       </section>
 
       <Footer brandName="Mozena" accentColor="bg-red-500" />
-    
     </>
   );
 }
